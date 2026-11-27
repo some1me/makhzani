@@ -1,18 +1,16 @@
 # مخزني | Makhzani
 
-Flutter inventory and POS prototype for Android and iOS, designed for offline use with SQLite. Supports Arabic RTL and English LTR.
+Flutter inventory/POS prototype using local SQLite, Arabic RTL and English LTR.
 
-## Available in this prototype
-- Local SQLite products and saved language selection.
-- Product search/entry, camera barcode scan screen, basic POS cart, discounts, and cash/card payment selection.
-- Transactional checkout with stock checks and stock movement records.
-- Purchase entry that increases stock.
-- Excel product-template export and `.xlsx` import.
-- Multi-sheet Excel export for inventory, low-stock products, sales, and purchases.
-- GitHub Actions for Flutter dependency resolution, static analysis, and tests.
+## Features implemented so far
+- Product catalogue, barcode lookup/scanning, and basic POS cart.
+- Transactional checkout with stock validation, discount/payment method, sale lines and stock movement ledger.
+- Purchase entry with supplier text, cost snapshots, and inventory replenishment.
+- Excel product-template export/import and multi-sheet inventory, low-stock, sales and purchase reports.
+- Local database schema migrations and a CI workflow for Flutter analysis/tests.
 
-## Run locally
-Install the stable Flutter SDK and Android Studio/Android SDK. Clone or download this repository, then run:
+## Run
+Install Flutter 3.32.8 (or a compatible stable SDK), Android Studio/Android SDK, then:
 
 ```sh
 flutter pub get
@@ -21,10 +19,7 @@ flutter test
 flutter run
 ```
 
-If platform folders are absent, generate the Android/iOS scaffolding with `flutter create . --platforms android,ios`. Barcode camera behavior requires a camera-capable device or simulator. iOS builds require macOS and Xcode.
+If platform folders are missing, generate scaffolding with `flutter create . --platforms android,ios`. Camera testing requires a camera-capable device. iOS builds require macOS and Xcode.
 
-## Excel product import
-Use an `.xlsx` workbook with a `Products` sheet (or first sheet) and header columns `name`, `barcode`, `price`, `quantity`. Names must be non-empty; prices and quantities must be non-negative numbers. Import is row-by-row, so validate the workbook before importing; keep a backup of business data.
-
-## Important limitations
-This is not yet a production-ready accounting system. It has not been verified on physical Android/iOS devices. Returns, detailed customer/supplier ledgers, receipt printing, database backup/restore, advanced profit analytics, access control, and signed release builds remain to be implemented and tested. Check the Actions workflow after pushing; CI does not replace device testing.
+## Important
+This is a prototype, not yet suitable as the only business accounting system. Test migrations on a copy of existing data and back up business records. Returns, persistent customer/supplier profiles, receipt printing, backup/restore, full profit analytics, access control, and signed production builds need more implementation and physical-device verification.
