@@ -5,7 +5,7 @@ on:
   pull_request:
     branches: [main]
 jobs:
-  analyze:
+  analyze-and-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -15,7 +15,5 @@ jobs:
           cache: true
       - run: flutter --version
       - run: flutter pub get
-      # Format in CI before analysis so style drift doesn't mask compiler/test errors.
-      - run: dart format lib test
       - run: flutter analyze
       - run: flutter test

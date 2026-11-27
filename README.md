@@ -1,27 +1,30 @@
 # مخزني | Makhzani
 
-Flutter inventory and point-of-sale app for Android and iOS, designed for offline use with SQLite. The interface supports Arabic RTL and English LTR.
+Flutter inventory and POS prototype for Android and iOS, designed for offline use with SQLite. Supports Arabic RTL and English LTR.
 
-## Current prototype features
-- Local SQLite products and saved language setting.
-- Product search and entry, barcode scan screen, basic POS cart, discounts and cash/card payment selection.
-- Checkout persisted transactionally with stock validation and stock-movement records.
-- Purchase entry that increases inventory.
-- Excel inventory export, product template export, and `.xlsx` import.
-- GitHub Actions workflow for dependency resolution, formatting, analysis and tests.
+## Available in this prototype
+- Local SQLite products and saved language selection.
+- Product search/entry, camera barcode scan screen, basic POS cart, discounts, and cash/card payment selection.
+- Transactional checkout with stock checks and stock movement records.
+- Purchase entry that increases stock.
+- Excel product-template export and `.xlsx` import.
+- Multi-sheet Excel export for inventory, low-stock products, sales, and purchases.
+- GitHub Actions for Flutter dependency resolution, static analysis, and tests.
 
-## Run
-Install Flutter SDK (stable), then:
+## Run locally
+Install the stable Flutter SDK and Android Studio/Android SDK. Clone or download this repository, then run:
 
 ```sh
 flutter pub get
+flutter analyze
+flutter test
 flutter run
 ```
 
-A camera-enabled Android/iOS device or simulator is needed to exercise barcode scanning. The app stores data locally on the device; it does not sync across devices.
+If platform folders are absent, generate the Android/iOS scaffolding with `flutter create . --platforms android,ios`. Barcode camera behavior requires a camera-capable device or simulator. iOS builds require macOS and Xcode.
 
-## Excel import format
-First sheet, columns in order: `name`, `barcode`, `price`, `quantity`. Use `.xlsx`, non-negative numeric price/quantity values, and unique barcodes. Back up your data before importing.
+## Excel product import
+Use an `.xlsx` workbook with a `Products` sheet (or first sheet) and header columns `name`, `barcode`, `price`, `quantity`. Names must be non-empty; prices and quantities must be non-negative numbers. Import is row-by-row, so validate the workbook before importing; keep a backup of business data.
 
-## Current limitations
-This is an early prototype and has not been built or tested on a device in this environment. Returns, customer/supplier ledgers, receipt printing, backups/restoration, advanced analytics, authentication, and release signing remain future work. Review the Actions checks after pushing and resolve any platform or package API issues they find.
+## Important limitations
+This is not yet a production-ready accounting system. It has not been verified on physical Android/iOS devices. Returns, detailed customer/supplier ledgers, receipt printing, database backup/restore, advanced profit analytics, access control, and signed release builds remain to be implemented and tested. Check the Actions workflow after pushing; CI does not replace device testing.
